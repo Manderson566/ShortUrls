@@ -112,12 +112,11 @@ namespace ShortUrls.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Description,Title,Url,ShortUrl,OwnerId,Public")] Bookmark bookmark)
+        public ActionResult Edit([Bind(Include = "Description,Title,Url,ShortUrl,OwnerId,Public")] Bookmark bookmark)
         {
             if (ModelState.IsValid)
             {
                 db.Bookmark.Add(bookmark);
-                bookmark.Created = DateTime.Now;
                 bookmark.OwnerId = User.Identity.GetUserId();
                 bookmark.ShortUrl = ShortUrl(bookmark.Url);
                 db.Entry(bookmark).State = EntityState.Modified;
