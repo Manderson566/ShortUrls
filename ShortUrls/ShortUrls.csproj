@@ -296,16 +296,12 @@
     <Content Include="Views\Bookmark\Details.cshtml" />
     <Content Include="Views\Bookmark\Edit.cshtml" />
     <Content Include="Views\Bookmark\Index.cshtml" />
-    <Content Include="Views\Click\Create.cshtml" />
-    <Content Include="Views\Click\Delete.cshtml" />
-    <Content Include="Views\Click\Details.cshtml" />
-    <Content Include="Views\Click\Edit.cshtml" />
-    <Content Include="Views\Click\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Click\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

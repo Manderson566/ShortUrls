@@ -53,5 +53,18 @@ namespace ShortUrls.Controllers
 
             return View();
         }
+        [Route("R/{ShortUrl}")]
+        public ActionResult Details(string ShortUrl)
+        {
+            Bookmark UrlInstance = db.Bookmark.Where(u => u.ShortUrl == ShortUrl).FirstOrDefault();
+            Click click = new Click();
+            Bookmark bookmark = db.Bookmark.Where(b => b.Public == true).Where(b => b.ShortUrl == ShortUrl).FirstOrDefault();
+            click.BookmarkId = bookmark.Id;
+            db.Click.Add(click);
+            click.Created = DateTime.Now;
+            bookmark.Clicks++;
+            db.SaveChanges();
+            return View(UrlInstance);
+        }
     }
 }

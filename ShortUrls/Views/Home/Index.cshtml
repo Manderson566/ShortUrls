@@ -1,27 +1,37 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<br />
 
-@using (Html.BeginForm())
-{
-    foreach (var bookmark in ViewBag.PublicBookmarks)
+<div class="container">
+    @using (Html.BeginForm())
     {
-        <div id="LeftColumn" style="float: Left; padding-left: 80px;">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-preview">
-                        <a href=@Url.Action("Details", new { id = bookmark.Id })>
-                            <h4 class="post-title">
-                                @bookmark.Title
-                            </h4>
-                        </a>
-                        <p class="post-subtitle"> @bookmark.Url</p>
+        foreach (var bookmark in ViewBag.PublicBookmarks)
+        {
+            <div id="LeftColumn" style="float: Left; padding-left: 50px;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Url</th>
+                            <th>UserName</th>
+                            <th>Created</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                                <td>@bookmark.Title</td> 
+                                <td>@bookmark.Url</td>
+                                <td>@bookmark.Owner.UserName</td>
+                                <td>@bookmark.Created</td>
+                                <td>@Html.ActionLink("Details","Details", new { id = bookmark.Id })</td>
 
-                        <p class="post-meta"> Posted by @bookmark.Owner.UserName on @bookmark.Created </p>
-                        <hr>
-                    </div>
-                </div>
+</tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
+        }
+
     }
-}
+</div>

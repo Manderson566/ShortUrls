@@ -3,7 +3,36 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<h1>@Model.UserName</h1>
 
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        foreach (var bookmark in ViewBag.PublicBookmarks)
+        {
+            <div id="LeftColumn" style="float: Left; padding-left: 50px;">
+                <h2>@Model.UserName ShrtUrl</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Url</th>
+                            <th>UserName</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@bookmark.Title</td>
+                            <td>@bookmark.Url</td>
+                            <td>@bookmark.Owner.UserName</td>
+                            <td>@bookmark.Created</td>
+                            <td>@Html.ActionLink("Details", "Details","Home", new { id = bookmark.Id })</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+
+    }
+</div>

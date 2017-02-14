@@ -35,20 +35,23 @@ namespace ShortUrls.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Bookmark
+        [Authorize]
         public ActionResult Index()
         {
-            var bookmark = db.Bookmark.Include(b => b.Owner);
+            var bookmark = db.Bookmark.Include(b => b.Owner).OrderByDescending(o => o.Created); ;
             return View(bookmark.ToList());
         }
 
         // GET: Bookmark/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookmark bookmark = db.Bookmark.Find(id);
+            var userId = User.Identity.GetUserId();
+            Bookmark bookmark = db.Bookmark.Where(b => b.OwnerId == userId).Where(b => b.Id == id).FirstOrDefault();
             if (bookmark == null)
             {
                 return HttpNotFound();
@@ -57,6 +60,7 @@ namespace ShortUrls.Controllers
         }
 
         // GET: Bookmark/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.OwnerId = new SelectList(db.Bookmark, "Id", "Email");
@@ -86,18 +90,19 @@ namespace ShortUrls.Controllers
         }
 
         // GET: Bookmark/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookmark bookmark = db.Bookmark.Find(id);
+            var userId = User.Identity.GetUserId();
+            Bookmark bookmark = db.Bookmark.Where(b => b.OwnerId == userId).Where(b => b.Id == id).FirstOrDefault();
             if (bookmark == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "Email", bookmark.OwnerId);
             return View(bookmark);
         }
 
@@ -110,6 +115,10 @@ namespace ShortUrls.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Bookmark.Add(bookmark);
+                bookmark.Created = DateTime.Now;
+                bookmark.OwnerId = User.Identity.GetUserId();
+                bookmark.ShortUrl = ShortUrl(bookmark.Url);
                 db.Entry(bookmark).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,13 +128,15 @@ namespace ShortUrls.Controllers
         }
 
         // GET: Bookmark/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookmark bookmark = db.Bookmark.Find(id);
+            var userId = User.Identity.GetUserId();
+            Bookmark bookmark = db.Bookmark.Where(b => b.OwnerId == userId).Where(b => b.Id == id).FirstOrDefault();
             if (bookmark == null)
             {
                 return HttpNotFound();
@@ -134,6 +145,7 @@ namespace ShortUrls.Controllers
         }
 
         // POST: Bookmark/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
