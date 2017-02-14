@@ -38,7 +38,8 @@ namespace ShortUrls.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var bookmark = db.Bookmark.Include(b => b.Owner).OrderByDescending(o => o.Created); ;
+            var userId = User.Identity.GetUserId();
+            var bookmark = db.Bookmark.Include(b => b.Owner).Where(b => b.OwnerId == userId).OrderByDescending(o => o.Created); ;
             return View(bookmark.ToList());
         }
 
