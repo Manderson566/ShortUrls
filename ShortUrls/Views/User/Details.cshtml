@@ -8,6 +8,10 @@
 <div class="container">
     @using (Html.BeginForm())
     {
+        <input type="submit" value="Add as Friend" class="btn btn-danger" />
+    }
+    @using (Html.BeginForm())
+    {
         foreach (var bookmark in ViewBag.PublicBookmarks)
         {
             <div id="LeftColumn" style="float: Left; padding-left: 50px;">
@@ -27,7 +31,7 @@
                             <td>@bookmark.Url</td>
                             <td>@bookmark.Owner.UserName</td>
                             <td>@bookmark.Created</td>
-                            <td>@Html.ActionLink("Details", "Details","Home", new { id = bookmark.Id })</td>
+                            <td>@Html.ActionLink("Details", "Details", "Home", new { id = bookmark.Id })</td>
                         </tr>
                     </tbody>
                 </table>

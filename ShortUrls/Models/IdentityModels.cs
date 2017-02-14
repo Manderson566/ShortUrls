@@ -21,6 +21,7 @@ namespace ShortUrls.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Friend> Friend { get; set; }
         public DbSet<Bookmark> Bookmark { get; set; }
         public DbSet<Click> Click { get; set; }
         public IEnumerable ApplicationUsers { get; internal set; }

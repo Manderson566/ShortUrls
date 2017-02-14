@@ -1,4 +1,5 @@
-﻿using ShortUrls.Models;
+﻿using Microsoft.AspNet.Identity;
+using ShortUrls.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,23 @@ namespace ShortUrls.Controllers
             ApplicationUser userInstance = db.Users.Where(u => u.UserName == UserName).FirstOrDefault();
             ViewBag.PublicBookmarks = db.Bookmark.Where(b => b.Public == true).Where(u => u.Owner.UserName == UserName).ToList().OrderByDescending(o => o.Created);
             return View(userInstance);
+        }
+
+        [HttpPost]
+        [Route("u/{userName}")]
+        public ActionResult AddFriend(string userName)
+        {
+
+            string me = User.Identity.GetUserId();
+            string target = db.Users.Where(u => u.UserName == userName).FirstOrDefault().Id;
+            Friend relationship = new Friend
+            {
+                RequestorId = me,
+                TargetId = target
+            };
+            db.Friend.Add(relationship);
+            db.SaveChanges();
+            return RedirectToAction("Details");
         }
     }
 }
