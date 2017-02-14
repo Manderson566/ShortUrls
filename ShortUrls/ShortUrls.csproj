@@ -200,12 +200,29 @@
     <Compile Include="Controllers\ClickController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201702131940560_Initial.cs" />
     <Compile Include="Migrations\201702131940560_Initial.Designer.cs">
       <DependentUpon>201702131940560_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702132217005_addedPublicBoolToBookmarkcs.cs" />
+    <Compile Include="Migrations\201702132217005_addedPublicBoolToBookmarkcs.Designer.cs">
+      <DependentUpon>201702132217005_addedPublicBoolToBookmarkcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702132252295_addedClickCounterToClickModel.cs" />
+    <Compile Include="Migrations\201702132252295_addedClickCounterToClickModel.Designer.cs">
+      <DependentUpon>201702132252295_addedClickCounterToClickModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702132331134_addedClicks.cs" />
+    <Compile Include="Migrations\201702132331134_addedClicks.Designer.cs">
+      <DependentUpon>201702132331134_addedClicks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702132341404_addedcountsClickwhenyouCLickondetails.cs" />
+    <Compile Include="Migrations\201702132341404_addedcountsClickwhenyouCLickondetails.Designer.cs">
+      <DependentUpon>201702132341404_addedcountsClickwhenyouCLickondetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -284,6 +301,8 @@
     <Content Include="Views\Click\Details.cshtml" />
     <Content Include="Views\Click\Edit.cshtml" />
     <Content Include="Views\Click\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,6 +318,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702131940560_Initial.resx">
       <DependentUpon>201702131940560_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702132217005_addedPublicBoolToBookmarkcs.resx">
+      <DependentUpon>201702132217005_addedPublicBoolToBookmarkcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702132252295_addedClickCounterToClickModel.resx">
+      <DependentUpon>201702132252295_addedClickCounterToClickModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702132331134_addedClicks.resx">
+      <DependentUpon>201702132331134_addedClicks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702132341404_addedcountsClickwhenyouCLickondetails.resx">
+      <DependentUpon>201702132341404_addedcountsClickwhenyouCLickondetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

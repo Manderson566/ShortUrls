@@ -7,11 +7,31 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShortUrls.Models;
+using Microsoft.AspNet.Identity;
+using System.Text;
+using System.IO;
+using System.Security.Cryptography;
 
 namespace ShortUrls.Controllers
 {
+   [Authorize]
     public class BookmarkController : Controller
     {
+        private static string ShortUrl(string Url)
+        {
+
+            byte[] byteData = Encoding.UTF8.GetBytes(Url);
+            Stream inputStream = new MemoryStream(byteData);
+            using (SHA256 shall = new SHA256Managed())
+            {
+                var result = shall.ComputeHash(inputStream);
+                string output = BitConverter.ToString(result);
+                string Hashed = (output.Replace("-", "").Substring(0, 5));
+                return Hashed;
+            }
+            
+        }
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Bookmark
@@ -48,14 +68,16 @@ namespace ShortUrls.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Created,Description,Title,Url,ShortUrl,OwnerId")] Bookmark bookmark)
+        public ActionResult Create([Bind(Include = "Id,Created,Description,Title,Url,ShortUrl,OwnerId,Public")] Bookmark bookmark)
         {
             if (ModelState.IsValid)
             {
                 db.Bookmark.Add(bookmark);
                 bookmark.Created = DateTime.Now;
-                bookmark.OwnerId = db.ApplicationUsers
+                bookmark.OwnerId = User.Identity.GetUserId();
+                bookmark.ShortUrl = ShortUrl(bookmark.Url);
                 db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
 
@@ -84,7 +106,7 @@ namespace ShortUrls.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Description,Title,Url,ShortUrl,OwnerId")] Bookmark bookmark)
+        public ActionResult Edit([Bind(Include = "Id,Created,Description,Title,Url,ShortUrl,OwnerId,Public")] Bookmark bookmark)
         {
             if (ModelState.IsValid)
             {

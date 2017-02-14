@@ -1,0 +1,78 @@
+﻿@model ShortUrls.Models.Bookmark
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="LeftColumn" style="float: Left; padding-left: 50px;">
+    <h2>Bookmark Details</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ShortUrl)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner.UserName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Clicks)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Title)
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Url)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(model => model.ShortUrl)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Created)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Owner.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Clicks)
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        @Html.ActionLink("Home", "Index", "Home", new { @class = "btn btn-primary" })
+    </p>
+</div>
