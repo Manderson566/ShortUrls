@@ -1,4 +1,5 @@
-﻿using ShortUrls.Models;
+﻿using Microsoft.AspNet.Identity;
+using ShortUrls.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace ShortUrls.Controllers
             return View();
 
         }
+
         public ActionResult Details(int? id)
 
         {

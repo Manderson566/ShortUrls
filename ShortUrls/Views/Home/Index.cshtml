@@ -17,17 +17,18 @@
                             <th>UserName</th>
                             <th>Created</th>
                             <th>Details</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                                <td>@bookmark.Title</td> 
-                                <td>@bookmark.Url</td>
-                                <td>@bookmark.Owner.UserName</td>
-                                <td>@bookmark.Created</td>
-                                <td>@Html.ActionLink("Details","Details", new { id = bookmark.Id })</td>
+                            <td>@bookmark.Title</td>
+                            <td>@bookmark.Url</td>
+                            <td>@bookmark.Owner.UserName</td>
+                            <td>@bookmark.Created</td>
+                            <td>@Html.ActionLink("Details", "Details", new { id = bookmark.Id })</td>
 
-</tr>
+                        </tr>
                     </tbody>
                 </table>
             </div>

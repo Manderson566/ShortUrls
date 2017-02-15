@@ -24,6 +24,7 @@ namespace ShortUrls.Models
         public DbSet<Friend> Friend { get; set; }
         public DbSet<Bookmark> Bookmark { get; set; }
         public DbSet<Click> Click { get; set; }
+        public DbSet<Like> Like { get; set; }
         public IEnumerable ApplicationUsers { get; internal set; }
 
         public ApplicationDbContext()

@@ -2,41 +2,95 @@
 @{
     ViewBag.Title = "Details";
 }
-
-
-
-<div class="container">
+<br />
+<br />
+<br />
+<br />
+<br />
+<div id="LeftColumn" style="float: Left; padding-left: 50px;">
     @using (Html.BeginForm())
     {
-        <input type="submit" value="Add as Friend" class="btn btn-danger" />
-    }
-    @using (Html.BeginForm())
-    {
+        <h2>@Model.UserName's Profile</h2>
+        if (ViewBag.Friends)
+        {
+            <h4>You are friends with @Model.UserName</h4>
+
+        }
+        else if (ViewBag.RequestSent)
+        {
+            <h4>Your friend request has been sent.</h4>
+        }
+        else
+        {
+            <input type="submit" value="Add Friend" class="btn btn-danger" />
+
+        }
+
+
+
+        <h2>@Model.UserName's Profile</h2>
+        if (ViewBag.Friends)
+        {
+            <h4>You are friends with @Model.UserName</h4>
+
+        }
+        <br />
+
         foreach (var bookmark in ViewBag.PublicBookmarks)
         {
-            <div id="LeftColumn" style="float: Left; padding-left: 50px;">
-                <h2>@Model.UserName ShrtUrl</h2>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Url</th>
-                            <th>UserName</th>
-                            <th>Created</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@bookmark.Title</td>
-                            <td>@bookmark.Url</td>
-                            <td>@bookmark.Owner.UserName</td>
-                            <td>@bookmark.Created</td>
-                            <td>@Html.ActionLink("Details", "Details", "Home", new { id = bookmark.Id })</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Url</th>
+                        <th>UserName</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@bookmark.Title</td>
+                        <td>@bookmark.Url</td>
+                        <td>@bookmark.Owner.UserName</td>
+                        <td>@bookmark.Created</td>
+                        <td>@Html.ActionLink("Details", "Details", "Home", new { id = bookmark.Id })</td>
+
+                        @if (ViewBag.Likes)
+                        {
+                            <td>You already liked this post</td>
+
+                        }
+                        else if (ViewBag.RequestSent)
+                        {
+                            <td> <input type="submit" value="Like" class="btn btn-default"/></td>
+
+
+                        }
+
+
+                    </tr>
+                </tbody>
+            </table>
         }
 
     }
+
+    @foreach (var like in ViewBag.LikeBookMark)
+    {
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>TargetID</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@like.targetID</td>
+            </tr>
+        </tbody>
+    </table>
+    }
+   
 </div>

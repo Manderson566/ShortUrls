@@ -228,12 +228,17 @@
     <Compile Include="Migrations\201702141850489_addedFriendModel.Designer.cs">
       <DependentUpon>201702141850489_addedFriendModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702142150164_addedLikeModel.cs" />
+    <Compile Include="Migrations\201702142150164_addedLikeModel.Designer.cs">
+      <DependentUpon>201702142150164_addedLikeModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Click.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -334,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702141850489_addedFriendModel.resx">
       <DependentUpon>201702141850489_addedFriendModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702142150164_addedLikeModel.resx">
+      <DependentUpon>201702142150164_addedLikeModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
